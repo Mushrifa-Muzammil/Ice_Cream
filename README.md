@@ -1,10 +1,8 @@
-# Ice_Cream
-# Ice_Cream
 # 🍦 IceWorld - Premium Ice Cream Shop
 
 IceWorld is a fully functional, responsive, and visually stunning e-commerce website for an ice cream parlor. Built with HTML, CSS, and JavaScript, it offers a seamless shopping experience with a modern, colorful design. Customers can browse popular and most-selling ice creams, add items to cart, like products, earn loyalty points, and place orders with delivery to Siyambalagaskotuwa, Kurunegala, Sri Lanka.
 
-<img width="1332" height="629" alt="image" src="https://github.com/user-attachments/assets/583c0d44-b92f-4fdf-9f3c-c97eda7f32fa" />
+screen-short.png
 
 ## ✨ Features
 
@@ -56,7 +54,7 @@ No build tools or server required – it's pure frontend.
 
 ## 📸 Screenshots
 
-<img width="1332" height="629" alt="image" src="https://github.com/user-attachments/assets/583c0d44-b92f-4fdf-9f3c-c97eda7f32fa" />
+<img width="1332" height="629" alt="image" src="screen-short.png" />
 
 ## 🤝 Contributing
 
