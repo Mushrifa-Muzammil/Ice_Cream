@@ -54,7 +54,7 @@ No build tools or server required – it's pure frontend.
 
 ## 📸 Screenshots
 
-<img width="1332" height="629" alt="image" src="screen-short.png" />
+<img width="1332" height="629" alt="image" src="assets/screen-short.png" />
 
 ## 🤝 Contributing
 
