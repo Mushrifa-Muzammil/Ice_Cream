@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>IceWorld | Premium Ice Cream</title>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="nav__header">
+      <div class="nav__logo">
+        <a href="#" class="logo">Ice<span>World</span></a>
+      </div>
+      <div class="nav__menu__btn" id="menu-btn">
+        <i class="ri-menu-3-line"></i>
+      </div>
+    </div>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#shop">Our Shop</a></li>
+      <li><a href="#offers">Offers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav__btns">
+      <button class="btn" id="wishlist-btn"><i class="ri-heart-line"></i><span id="wishlist-count" class="count-badge">0</span></button>
+      <button class="btn cart-btn" id="cart-btn"><i class="ri-shopping-cart-line"></i><span id="cart-count" class="count-badge">0</span></button>
+      <button class="btn" id="user-btn"><i class="ri-user-line"></i></button>
+      <div class="points-display" id="points-display">⭐ 0 pts</div>
+    </div>
+  </nav>
+
+  <!-- Wishlist Sidebar -->
+  <div class="wishlist-sidebar" id="wishlist-sidebar">
+    <div class="wishlist-header">
+      <h3>Your Wishlist</h3>
+      <button class="close-wishlist" id="close-wishlist"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="wishlist-items" id="wishlist-items"></div>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="close-cart" id="close-cart"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cart-total-price">$0.00</span>
+    </div>
+    <div class="cart-footer">
+      <button class="btn btn-primary" id="checkout-btn">Checkout</button>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal" id="login-modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-login">&times;</span>
+      <h3>Welcome Back!</h3>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+      <p class="modal-switch">Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div class="modal" id="signup-modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-signup">&times;</span>
+      <h3>Create Account</h3>
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="signup-name">Full Name</label>
+          <input type="text" id="signup-name" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+      </form>
+      <p class="modal-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+    </div>
+  </div>
+
+  <!-- Order History Modal -->
+  <div class="modal" id="orders-modal">
+    <div class="modal-content modal-lg">
+      <span class="close-modal" id="close-orders">&times;</span>
+      <h3>My Orders</h3>
+      <div id="orders-list"></div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal (location pre-filled) -->
+  <div class="checkout-modal" id="checkout-modal">
+    <div class="checkout-content">
+      <h3>Complete Your Order</h3>
+      <p class="delivery-note">Delivery to Siyambalagaskotuwa, Kurunegala, Sri Lanka</p>
+      <form id="checkout-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="John Doe" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="address">Street Address</label>
+            <input type="text" id="address" value="Siyambalagaskotuwa" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" value="Kurunegala" required>
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" value="Sri Lanka" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="077 123 4567" required>
+          </div>
+          <div class="form-group">
+            <label for="delivery-time">Delivery Time</label>
+            <select id="delivery-time" required>
+              <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
+              <option value="12:00-14:00">12:00 PM - 2:00 PM</option>
+              <option value="14:00-16:00">2:00 PM - 4:00 PM</option>
+              <option value="16:00-18:00">4:00 PM - 6:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="checkout-actions">
+          <button type="button" class="btn btn-outline" id="back-to-cart">Back</button>
+          <button type="submit" class="btn btn-primary" id="confirm-order">Confirm Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Header / Hero -->
+  <header id="home">
+    <div class="header__image">
+      <img src="./assets/header.png" alt="Ice Cream Cone" />
+    </div>
+    <div class="header__content">
+      <h1>WELCOME TO OUR <span>ICE CREAM</span> WORLD</h1>
+      <p class="section__description">Indulge in a delightful journey of flavors! Discover creamy, delicious ice creams crafted to bring joy to every scoop.</p>
+      <div class="header__btn">
+        <button class="btn btn-primary">Shop Now</button>
+      </div>
+      <ul class="socials">
+        <li><a href="#"><i class="ri-facebook-fill"></i></a></li>
+        <li><a href="#"><i class="ri-twitter-fill"></i></a></li>
+        <li><a href="#"><i class="ri-pinterest-line"></i></a></li>
+        <li><a href="#"><i class="ri-phone-fill"></i></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Popular Menu (6 items) -->
+  <section class="section__container popular__container" id="menu">
+    <h2 class="section__header">Popular Ice-Cream</h2>
+    <div class="popular__grid">
+      <!-- Item 1: Mango Tango Sorbet -->
+      <div class="popular__card" data-id="1" data-name="Mango Tango Sorbet" data-price="5.49" data-image="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=400&auto=format">
+        <div class="card-badge"><i class="ri-heart-line wishlist-icon" data-id="1"></i></div>
+        <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=400&auto=format" alt="Mango Tango Sorbet" />
+        <div class="popular__card__content">
+          <h4>Mango Tango Sorbet</h4>
+          <div class="rating">★★★★☆ (45)</div>
+          <h3>$5.49</h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Item 2: Chocolate Fudge Delight -->
+      <div class="popular__card" data-id="2" data-name="Chocolate Fudge Delight" data-price="5.99" data-image="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&auto=format">
+        <div class="card-badge"><i class="ri-heart-line wishlist-icon" data-id="2"></i></div>
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&auto=format" alt="Chocolate Fudge Delight" />
+        <div class="popular__card__content">
+          <h4>Chocolate Fudge Delight</h4>
+          <div class="rating">★★★★★ (78)</div>
+          <h3>$5.99</h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Item 3: Strawberry Swirl Bliss -->
+      <div class="popular__card" data-id="3" data-name="Strawberry Swirl Bliss" data-price="4.99" data-image="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&auto=format">
+        <div class="card-badge"><i class="ri-heart-line wishlist-icon" data-id="3"></i></div>
+        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&auto=format" alt="Strawberry Swirl Bliss" />
+        <div class="popular__card__content">
+          <h4>Strawberry Swirl Bliss</h4>
+          <div class="rating">★★★★☆ (32)</div>
+          <h3>$4.99</h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Item 4: Pistachio Paradise -->
+      <div class="popular__card" data-id="7" data-name="Pistachio Paradise" data-price="6.49" data-image="https://images.unsplash.com/photo-1623944889288-6bda8c0f5b9d?w=400&auto=format">
+        <div class="card-badge"><i class="ri-heart-line wishlist-icon" data-id="7"></i></div>
+        <img src="./assets/Pistachio Paradise.jpg" alt="Pistachio Paradise" />
+        <div class="popular__card__content">
+          <h4>Pistachio Paradise</h4>
+          <div class="rating">★★★★☆ (27)</div>
+          <h3>$6.49</h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Item 5: Caramel Crunch -->
+      <div class="popular__card" data-id="8" data-name="Caramel Crunch" data-price="5.99" data-image="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=400&auto=format">
+        <div class="card-badge"><i class="ri-heart-line wishlist-icon" data-id="8"></i></div>
+        <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=400&auto=format" alt="Caramel Crunch" />
+        <div class="popular__card__content">
+          <h4>Caramel Crunch</h4>
+          <div class="rating">★★★★★ (93)</div>
+          <h3>$5.99</h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Item 6: Blueberry Cheesecake -->
+      <div class="popular__card" data-id="9" data-name="Blueberry Cheesecake" data-price="6.99" data-image="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&auto=format">
+        <div class="card-badge"><i class="ri-heart-line wishlist-icon" data-id="9"></i></div>
+        <img src="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&auto=format" alt="Blueberry Cheesecake" />
+        <div class="popular__card__content">
+          <h4>Blueberry Cheesecake</h4>
+          <div class="rating">★★★★☆ (51)</div>
+          <h3>$6.99</h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Most Selling / Discover -->
+  <section class="section__container discover__container" id="categories">
+    <h2 class="section__header">Most Selling Ice-Cream</h2>
+    <p class="section__description">Discover our crowd favorites! These ice creams are loved by everyone.</p>
+    <div class="discover__grid">
+      <!-- Double Chocolate Crunch -->
+      <div class="discover__card" data-id="4" data-name="Double Chocolate Crunch" data-price="6.99" data-image="https://images.unsplash.com/photo-1516559828980-fb2b4883d1e0?w=600&auto=format">
+        <img src="./assets/Double Chocolate Crunch.jpg" alt="Double Chocolate Crunch" />
+        <div class="discover__card__content">
+          <div class="card-header"><h4>Double Chocolate Crunch</h4><i class="ri-heart-line wishlist-icon" data-id="4"></i></div>
+          <p class="section__description">Rich and creamy with crunchy chocolate chunks.</p>
+          <div class="rating">★★★★★ (112)</div>
+          <h3>$6.99 <span><s>$9.99</s></span></h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Strawberry Cheesecake Bliss -->
+      <div class="discover__card" data-id="5" data-name="Strawberry Cheesecake Bliss" data-price="5.99" data-image="https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=600&auto=format">
+        <img src="https://icecreamin.com/wp-content/uploads/2024/11/Variations-of-Strawberry-Cheesecake-Ice-Cream-683x1024.jpg" alt="Strawberry Cheesecake Bliss" />
+        <div class="discover__card__content">
+          <div class="card-header"><h4>Strawberry Cheesecake Bliss</h4><i class="ri-heart-line wishlist-icon" data-id="5"></i></div>
+          <p class="section__description">Perfect harmony of fruity and creamy.</p>
+          <div class="rating">★★★★☆ (89)</div>
+          <h3>$5.99 <span><s>$8.99</s></span></h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Classic Cookies and Cream -->
+      <div class="discover__card" data-id="6" data-name="Classic Cookies and Cream" data-price="5.49" data-image="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format">
+        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format" alt="Classic Cookies and Cream" />
+        <div class="discover__card__content">
+          <div class="card-header"><h4>Classic Cookies and Cream</h4><i class="ri-heart-line wishlist-icon" data-id="6"></i></div>
+          <p class="section__description">Vanilla ice cream packed with chocolate cookies.</p>
+          <div class="rating">★★★★★ (201)</div>
+          <h3>$5.49 <span><s>$10.49</s></span></h3>
+          <button class="btn btn-outline add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section__container gallery__container" id="gallery">
+    <h2 class="section__header">Ice Cream Gallery</h2>
+    <p class="section__description">A visual treat of our delicious creations and happy moments.</p>
+    <div class="gallery__grid">
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&auto=format" alt="Ice Cream 1" /><div class="gallery__overlay"><span>Sweet Delight</span></div></div>
+      <div class="gallery__item"><img src="https://th.bing.com/th/id/OIP.QRi_Vpb9ympG9okRpU-sRAHaEO?w=271&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Ice Cream 2" /><div class="gallery__overlay"><span>Happy Customers</span></div></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&auto=format" alt="Ice Cream 3" /><div class="gallery__overlay"><span>Cozy Shop</span></div></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&auto=format" alt="Ice Cream 4" /><div class="gallery__overlay"><span>Interior</span></div></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&auto=format" alt="Ice Cream 5" /><div class="gallery__overlay"><span>Strawberry Bliss</span></div></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&auto=format" alt="Ice Cream 6" /><div class="gallery__overlay"><span>Blueberry Cheesecake</span></div></div>
+    </div>
+  </section>
+
+  <!-- Our Shop Section -->
+  <section class="section__container shop__container" id="shop">
+    <h2 class="section__header">Visit Our Shop</h2>
+    <p class="section__description">Come enjoy the sweetest moments at our cozy ice cream parlor in Siyambalagaskotuwa.</p>
+    <div class="shop__grid">
+      <div class="shop__image"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&auto=format" alt="Shop Exterior" /></div>
+      <div class="shop__image"><img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&auto=format" alt="Shop Interior" /></div>
+      <div class="shop__image"><img src="https://s.hdnux.com/photos/01/41/74/76/25677734/3/ratio3x2_1920.jpg" alt="Happy Staff" /></div>
+      <div class="shop__image"><img src="./assets/Ice Cream Counter.jpg" alt="Ice Cream Counter" /></div>
+    </div>
+  </section>
+
+  <!-- Banner -->
+  <section class="banner">
+    <div class="banner__image" style="background-image: url('https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=1200&auto=format');"></div>
+    <div class="banner__content">
+      <h2 class="section__header">Get Yummy Ice-Cream at a Reasonable Price</h2>
+      <p class="section__description">Treat yourself without breaking the bank!</p>
+      <div class="banner__flex">
+        <div class="banner__card"><img src="https://cdn-icons-png.flaticon.com/512/1625/1625016.png" alt="Fresh & Natural" /><h4>Fresh & Natural</h4></div>
+        <div class="banner__card"><img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Quick Packaging" /><h4>Quick Packaging</h4></div>
+        <div class="banner__card"><img src="https://cdn-icons-png.flaticon.com/512/3095/3095583.png" alt="Fast Delivery" /><h4>Fast Delivery</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Offers with Countdown -->
+  <section class="section__container offers__container" id="offers">
+    <h2 class="section__header">Limited Time Offers</h2>
+    <div class="offers__grid">
+      <div class="offer__card">
+        <h3>Buy 1 Get 1 Free</h3>
+        <p>On all mango flavors</p>
+        <div class="countdown" id="offer1-countdown">Ends in: 02:15:30</div>
+      </div>
+      <div class="offer__card">
+        <h3>20% Off</h3>
+        <p>On orders above $25</p>
+        <div class="countdown" id="offer2-countdown">Ends in: 01:05:20</div>
+      </div>
+      <div class="offer__card">
+        <h3>Free Delivery</h3>
+        <p>Today only!</p>
+        <div class="countdown" id="offer3-countdown">Ends in: 00:45:10</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscribe -->
+  <section class="section__container subscribe__container" id="contact">
+    <div class="subscribe__content">
+      <h2 class="section__header">Subscribe For Discounts</h2>
+      <p class="section__description">Get exclusive offers and updates.</p>
+      <form>
+        <input type="email" placeholder="Your Email" />
+        <button class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="section__container footer__container">
+      <div class="footer__col">
+        <a href="#" class="logo">Ice<span>World</span></a>
+        <p class="footer__address"><i class="ri-map-pin-line"></i> Siyambalagaskotuwa, Kurunegala, Sri Lanka</p>
+        <div class="payment-icons">
+          <i class="ri-visa-line"></i>
+          <i class="ri-mastercard-line"></i>
+          <i class="ri-amex-line"></i>
+          <i class="ri-paypal-line"></i>
+        </div>
+      </div>
+      <div class="footer__col">
+        <ul class="footer__links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#shop">Our Shop</a></li>
+          <li><a href="#offers">Offers</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <ul class="socials">
+          <li><a href="#"><i class="ri-facebook-fill"></i></a></li>
+          <li><a href="#"><i class="ri-twitter-fill"></i></a></li>
+          <li><a href="#"><i class="ri-pinterest-line"></i></a></li>
+          <li><a href="#"><i class="ri-phone-fill"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bar">
+      © 2025 IceWorld. All rights reserved. | Delivering to Siyambalagaskotuwa, Kurunegala.
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="main.js"></script>
+</body>
+</html>
